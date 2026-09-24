@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The relay endpoint in lib/core/config.dart defaults to a PLAIN HTTP URL
+  (http://79.76.61.69:9602). Android 9 (API 28) and later block cleartext
+  traffic by default, so without this file every request fails with:
+
+      java.io.IOException: Cleartext HTTP traffic to 79.76.61.69 not permitted
+
+  This config re-enables cleartext so the app functions. It is the minimum
+  change that makes the app work, NOT the secure end state.
+
+  TODO(security): move the relay behind TLS and then either delete this file
+  or narrow it to a single pinned domain:
+
+      <domain-config cleartextTrafficPermitted="false">
+          <domain includeSubdomains="true">relay.rafzzermes.app</domain>
+      </domain-config>
+
+  Credentials are POSTed to /auth/login over this connection in cleartext
+  today. Anyone on the same network can read them.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
