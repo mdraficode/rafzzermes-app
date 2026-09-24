@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'core/config.dart';
 import 'core/client/relay_client.dart';
 import 'core/relay_provider.dart';

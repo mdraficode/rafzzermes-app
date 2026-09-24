@@ -4,7 +4,11 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.7.0 <4.0.0'
+  # The lockfile resolved to packages needing Dart >=3.12.0 (see the sdks:
+  # section of the previous pubspec.lock), so the old >=3.7.0 lower bound was
+  # a lie: pub get would fail on any toolchain between Dart 3.7 and 3.11.
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.44.0'
 
 dependencies:
   flutter:
@@ -13,8 +17,12 @@ dependencies:
   web_socket_channel: ^3.0.0
   http: ^1.4.0
   provider: ^6.1.0
-  firebase_messaging: ^15.2.0
-  webview_flutter: ^4.11.0
+  # firebase_messaging: REMOVED. It was declared but never imported anywhere in
+  # lib/, so it only added weight and a hard build dependency on a
+  # google-services.json that this repo does not contain. Add it back only
+  # together with the google-services Gradle plugin and a real config file.
+  # webview_flutter: REMOVED. Also declared but never used in lib/.
+  # Keeping it dragged in the jni + jni_flutter native plugins.
 
 dev_dependencies:
   flutter_test:

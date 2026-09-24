@@ -23,10 +23,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final List<ChatMessage> _messages = [
-    ChatMessage(role: 'assistant', content: 'Hello, I am ready to help.'),
-    ChatMessage(role: 'user', content: 'Summarize the Hermes state.'),
-  ];
+  // Was pre-seeded with two hard-coded messages ('Hello, I am ready to help.'
+  // and 'Summarize the Hermes state.') that rendered as if they were real
+  // conversation. Start empty instead.
+  final List<ChatMessage> _messages = [];
   final _controller = TextEditingController();
 
   int? _pendingAssistantIndex;
